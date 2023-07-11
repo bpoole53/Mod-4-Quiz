@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande';
+    font-size: 2rem;
+}
+
+.main-header h1 {
+    color: darkorchid;
+}
