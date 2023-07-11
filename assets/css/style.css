@@ -1,3 +1,8 @@
+:root {
+    --highlight: darkorchid;
+    --dark: darkblue;
+}
+
 * {
     box-sizing: border-box;
     font-size: 16px;
@@ -13,5 +18,64 @@
 }
 
 .main-header h1 {
-    color: darkorchid;
+    color: var(--highlight);
 }
+
+.quiz-questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.choice-buttons {
+    padding: 1rem;
+}
+
+#button1 {
+    border-radius: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: .5rem;
+}
+
+#button2 {
+    border-radius: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: .5rem;
+}
+
+#button3 {
+    border-radius: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: .5rem;
+}
+
+#button4 {
+    border-radius: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: .5rem;
+}
+
+ #button1:hover {
+    background-color: var(--highlight);
+    cursor: pointer;
+ }
+
+ #button2:hover {
+    background-color: var(--highlight);
+    cursor: pointer;
+ } 
+
+ #button3:hover {
+    background-color: var(--highlight);
+    cursor: pointer;
+ }
+
+ #button4:hover {
+    background-color: var(--highlight);
+    cursor: pointer;
+ }

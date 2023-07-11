@@ -1,9 +1,9 @@
-var timerEl = document.querySelector('#time');
+var timerEl = document.getElementById('time');
 
 
-var timeLeft = 60;
+var timeLeft = 61;
 
-/*Add a timer that counts down by 1 per second starting with a value of 60, also sends the user to the end page if the timer hits 0*/
+/*Add a timer that counts down by 1 per second, also sends the user to the end page if the timer hits 0*/
 function timerCountdown() {
     var timerInterval = setInterval(function() {
         timeLeft--;
@@ -18,4 +18,3 @@ function timerCountdown() {
 
 timerCountdown();
 
-console.log(timeLeft);
