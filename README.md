@@ -2,7 +2,7 @@
 
 ## Description
 
-This is an interactive quiz.  Most of the questions are from different regions so this quiz will sure test the user's historical knowledge!
+This is an interactive quiz.  Most of the questions are from different regions so this quiz will surely test the user's historical knowledge!
 
 ![Alt text](./assets/images/Mod4-ReadmeScreenshot.png)
 
