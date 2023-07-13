@@ -8,6 +8,10 @@
     font-size: 16px;
 }
 
+body {
+    width: 100%;
+}
+
 .main-header {
     display: flex;
     flex-direction: row;
@@ -17,15 +21,51 @@
     font-size: 2rem;
 }
 
-.main-header h1 {
+.main-header a {
     color: var(--highlight);
+    font-size: 2rem;
+    text-decoration: none;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-page h1 {
+    font-size: 2rem;
+}
+
+.main-page p {
+    font-size: 1.5rem;
+}
+
+#start {
+    border-radius: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: .5rem;
 }
 
 .quiz-questions {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding-top: 10rem;
+}
+
+#list-question {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: .5rem;
+}
+
+#additional-text {
+    font-size: 1.5rem;
+    padding: .5rem;
 }
 
 .choice-buttons {
@@ -37,6 +77,7 @@
     background-color: var(--dark);
     color: white;
     padding: .5rem;
+    font-size: 1.5rem;
 }
 
 #button2 {
@@ -44,6 +85,7 @@
     background-color: var(--dark);
     color: white;
     padding: .5rem;
+    font-size: 1.5rem;
 }
 
 #button3 {
@@ -51,6 +93,7 @@
     background-color: var(--dark);
     color: white;
     padding: .5rem;
+    font-size: 1.5rem;
 }
 
 #button4 {
@@ -58,6 +101,7 @@
     background-color: var(--dark);
     color: white;
     padding: .5rem;
+    font-size: 1.5rem;
 }
 
  #button1:hover {
@@ -78,4 +122,15 @@
  #button4:hover {
     background-color: var(--highlight);
     cursor: pointer;
+ }
+
+ #bottom-text {
+    padding-top: .5rem;
+    margin-top: 2rem;
+    width: 25%;
+    border-top: 2px solid rgb(181, 181, 181);
+    text-align: start;
+    font-style: italic;
+    font-size: 2rem;
+    color: rgb(181, 181, 181);
  }
