@@ -27,27 +27,6 @@ body {
     text-decoration: none;
 }
 
-.main-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.main-page h1 {
-    font-size: 2rem;
-}
-
-.main-page p {
-    font-size: 1.5rem;
-}
-
-#start {
-    border-radius: 1rem;
-    background-color: var(--dark);
-    color: white;
-    padding: .5rem;
-}
-
 .quiz-questions {
     display: flex;
     flex-direction: column;
@@ -66,6 +45,23 @@ body {
 #additional-text {
     font-size: 1.5rem;
     padding: .5rem;
+}
+
+#submit-button {
+    border-radius: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: .5rem;
+    font-size: .7rem;
+}
+
+#submit-button:hover {
+    background-color: var(--highlight);
+    cursor: pointer;
+}
+
+#table-form {
+    text-align: center;
 }
 
 .choice-buttons {
@@ -103,6 +99,7 @@ body {
     padding: .5rem;
     font-size: 1.5rem;
 }
+
 
  #button1:hover {
     background-color: var(--highlight);
