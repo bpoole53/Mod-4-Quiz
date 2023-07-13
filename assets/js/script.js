@@ -29,6 +29,9 @@ let timeLeft = 100;
 let currentQ = 0;
 
 function startQuiz() {
+    button1.removeEventListener('click', checkAnswer);
+    button1.removeEventListener('click', startOver);
+    button2.removeEventListener('click', clearScore);
     clearInterval(timeInterval);
     timer.style.visibility = "visible";
     initial.style.visibility = "hidden";
@@ -83,6 +86,8 @@ function questionDisplay() {
 }
 
 function endPage() {
+    button1.removeEventListener('click', checkAnswer);
+    button2.removeEventListener('click', checkAnswer);
     button1.style.visibility = "hidden";
     button2.style.visibility = "hidden";
     button3.style.visibility = "hidden";
@@ -94,16 +99,10 @@ function endPage() {
         clearInterval(timeInterval);
         button1.style.visibility = "visible";
         button1.textContent = "Start Over";
-        button1.addEventListener('click', () => {
-            timeLeft = 100;
-            startQuiz();        
-            
-        });
+        button1.addEventListener('click', startOver);
         button2.style.visibility = "visible";
         button2.textContent = "High Scores";
-        button2.addEventListener('click', () => {     
-            highScore();
-        });
+        button2.addEventListener('click', highScore);
     }
     else {
         clearInterval(timeInterval);
@@ -115,10 +114,11 @@ function endPage() {
 
 /* grab the user selection by finding the 2nd element after the '.', trims the white space from the start and end (though in this instance it's only the start that is needed), and then compares it to the correct answer.  The correct answer is each 6th string in the 'contents' array.  In the questionOne() function the currentQ variable is set to 5.  The questionDisplay() function then increments the 'currentQ' variable by 1 each time it adds text to an element to get to the right value in the 'contents' array for the next element, 'currentQ' will end up on the correct answer value by the end of the function.  So the user selection is compared to the correct answer, if the values match then 'Correct' pops up at the bottom and after a 2 second delay they move on to the next question.  If the values do not match then 'Wrong' pops up at the bottom, the time left decrements by 10, and then they move on to the next question.  If time goes to 0 or less then the quiz is over and the user is sent to the endPage(). */
 function checkAnswer(event){
+    if (event.target.textContent !== 'Start Over' || 'Clear High Scores' || 'Start Quiz') {
     console.log(event.target.textContent)
-    const userSelection = event.target.textContent.split(".")[1].trim();
+    var userSelection = event.target.textContent.split(".")[1].trim();
     console.log(userSelection)
-    
+    }
     if(userSelection === contents[currentQ]){
     bottomText.style.visibility = "visible";
     bottomText.textContent = "Correct!";
@@ -141,7 +141,11 @@ function checkAnswer(event){
 
 //updates the timer text
 function updateTimer() {
-    timer.textContent = "Time: " + timeLeft;
+    if (timeLeft <= 0) {
+        timer.textContent = "Time's Up!";
+    }else{    
+        timer.textContent = "Time: " + timeLeft;
+    }    
 }
 
 let timeInterval;
@@ -150,7 +154,7 @@ function timerCountdown() {
     timeInterval = setInterval(function() {
         timeLeft--;
         if (timeLeft <= 0) {
-            clearInterval(timeInterval);        
+            clearInterval(timeInterval);
             endPage();
         }
         updateTimer();
@@ -162,9 +166,9 @@ function minusTen () {
     timeLeft-=10
     if(timeLeft < 0){
         timeLeft = 0;
-        timer.textContent = "Time's Up!"
-        clearInterval(timeInterval)
-        endPage()
+        clearInterval(timeInterval);
+        timer.textContent = "Time's Up!";
+        endPage();
     }else{
         updateTimer();
     }
@@ -188,7 +192,20 @@ function showScore() {
     
 }
 
+function startOver() {
+    timeLeft = 100;
+    startQuiz();
+}
+
+function clearScore() {
+    localStorage.clear();
+    showScore();
+}
+
 function highScore() {
+    button1.removeEventListener('click', checkAnswer);
+    button2.removeEventListener('click', checkAnswer);
+    button2.removeEventListener('click', highScore);
     clearInterval(timeInterval);
     timer.style.visibility = "hidden";
     topText.textContent = "High Scores";
@@ -204,14 +221,8 @@ function highScore() {
     button1.textContent = "Start Over"
     button2.textContent = "Clear High Scores"
     showScore();
-    button1.addEventListener('click', () => {        
-        timeLeft = 100;
-        startQuiz();
-    });
-    button2.addEventListener('click', () => {
-        localStorage.clear();
-        showScore();
-    });
+    button1.addEventListener('click', startOver);
+    button2.addEventListener('click', clearScore);
 }
 
 console.log(this);
