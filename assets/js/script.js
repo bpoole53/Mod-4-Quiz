@@ -23,31 +23,31 @@ var score = document.getElementById('high-scores');
 //         answer:"a1"
 //     }
 // ]
-const contents = ['Who was the first emperor of Rome?', 'Nero', 'Augustus', 'Tiberius', 'Marcus Aurelius', 'Augustus', 'Who was the ruler of France at the beginning of the French Revolution?', 'Louis XVI', 'Charles II', 'Phillip IV', 'Louis XIV', 'Louis XVI', "What was the name of George Washington's estate?", 'Cape Hope', 'Mount Vernon', 'The Hanging Gardens', 'Oak Alley', 'Mount Vernon', 'Considered a surrogate son to George Washington, who was the Frenchman known as the "Hero of Two Worlds"?', 'Louis Pastuer', 'Charles de Gaulle', 'Victor Hugo', 'Marquis de La Fayette', 'Marquis de La Fayette', 'As a result of the Meiji Restoration, the end of this period marked the end of Japanese Feudalism and the beginning of the modern era in Japan.', 'Heian period', 'Asuka period', 'Sengoku period', 'Edo period', 'Edo period']
+const contents = ['Who was the first emperor of Rome?', 'Nero', 'Augustus', 'Tiberius', 'Marcus Aurelius', 'Augustus', 'Who was the ruler of France at the beginning of the French Revolution?', 'Louis XVI', 'Charles II', 'Phillip IV', 'Louis XIV', 'Louis XVI', "What was the name of George Washington's estate?", 'Cape Hope', 'Mount Vernon', 'The Hanging Gardens', 'Oak Alley', 'Mount Vernon', 'Considered a surrogate son to George Washington, who was the Frenchman known as the "Hero of Two Worlds"?', 'Louis Pastuer', 'Charles de Gaulle', 'Victor Hugo', 'Marquis de La Fayette', 'Marquis de La Fayette', 'As a result of the Meiji Restoration, the end of this period marked the end of Japanese Feudalism and the beginning of the modern era in Japan.', 'Heian period', 'Asuka period', 'Sengoku period', 'Edo period', 'Edo period'];
 
-let timeLeft = 60;
+let timeLeft = 100;
 let currentQ = 0;
 
-
-
-
 function startQuiz() {
+    clearInterval(timeInterval);
+    timer.style.visibility = "visible";
+    initial.style.visibility = "hidden";
     score.style.visibility = "hidden";
     submission.style.visibility = "hidden";
     moreText.style.visibility = "visible";
-    topText.textContent = ("History Quiz Challenge");
-    moreText.textContent = ("Try to answer the following history related questions within the time limit. Be aware: incorrect answers will penalize your score/time by ten seconds!");
-    button1.textContent = "Start Quiz";
     button2.style.visibility = "hidden";
     button3.style.visibility = "hidden";
     button4.style.visibility = "hidden";
     bottomText.style.visibility = "hidden";
+    topText.textContent = ("History Quiz Challenge");
+    moreText.textContent = ("Try to answer the following history related questions within the time limit. Be aware: incorrect answers will penalize your score/time by ten seconds!");    
+    button1.textContent = "Start Quiz";
+    updateTimer();    
     button1.addEventListener('click',questionOne)
-    
 }
 
 function questionOne() {
-    button1.removeEventListener('click', questionOne)
+    button1.removeEventListener('click', questionOne);
     timerCountdown();  
     moreText.style.visibility = "hidden";
     button2.style.visibility = "visible";
@@ -82,92 +82,20 @@ function questionDisplay() {
     
 }
 
-function questionThree() {
-    topText.textContent = contents[10];
-    button1.textContent = "A. " + contents[11];
-    button2.textContent = "B. " + contents[12];
-    button3.textContent = "C. " + contents[13];
-    button4.textContent = "D. " + contents[14];
-    button1.addEventListener('click', () => {
-        wrong();     
-        questionFour();
-    })  
-    button2.addEventListener('click', () => {
-        correct();        
-        questionFour();   
-    })
-    button3.addEventListener('click', () => {
-        wrong();
-        questionFour();
-    })
-    button4.addEventListener('click', () => {
-        wrong();
-        questionFour();
-    })  
-}
-
-function questionFour() {
-    topText.textContent = contents[15];
-    button1.textContent = "A. " + contents[16];
-    button2.textContent = "B. " + contents[17];
-    button3.textContent = "C. " + contents[18];
-    button4.textContent = "D. " + contents[19];
-    button1.addEventListener('click', () => {
-        wrong();
-        questionFive();
-    })  
-    button2.addEventListener('click', () => {
-        wrong();
-        questionFive();   
-    })
-    button3.addEventListener('click', () => {
-        wrong();
-        questionFive();
-    })
-    button4.addEventListener('click', () => {
-        correct();        
-        questionFive();
-    })  
-}
-
-function questionFive() {
-    topText.textContent = contents[20];
-    button1.textContent = "A. " + contents[21];
-    button2.textContent = "B. " + contents[22];
-    button3.textContent = "C. " + contents[23];
-    button4.textContent = "D. " + contents[24];
-    button1.addEventListener('click', () => {
-        wrong();        
-        endPage();
-    })  
-    button2.addEventListener('click', () => {
-        wrong();
-        endPage(); 
-    })
-    button3.addEventListener('click', () => {
-        wrong();
-        endPage();
-    })
-    button4.addEventListener('click', () => {
-        correct();
-        endPage();
-    })  
-}
-
 function endPage() {
+    button1.style.visibility = "hidden";
+    button2.style.visibility = "hidden";
     button3.style.visibility = "hidden";
     button4.style.visibility = "hidden";    
     topText.textContent = "All Done!";
     moreText.textContent = "Your Final score is " + timeLeft;
     moreText.style.visibility = "visible";
     if (timeLeft <= 0) {
-        submission.style.visibility = "visible";
-        initials.style.visibility = "visible";
         clearInterval(timeInterval);
         button1.style.visibility = "visible";
-        button1.textContent = "Try Again";
-        submitInit();
+        button1.textContent = "Start Over";
         button1.addEventListener('click', () => {
+            timeLeft = 100;
             startQuiz();        
             
         });
@@ -178,35 +106,19 @@ function endPage() {
         });
     }
     else {
-        submission.style.visibility = "visible";
         clearInterval(timeInterval);
-        button1.style.visibility = "visible";
-        button1.textContent = "Try Again";
-        submitInit()
-        button1.addEventListener('click', () => {
-            timeLeft = 60;
-            startQuiz();
-        });    
-        button2.style.visibility = "visible";
-        button2.textContent = "High Scores";
-        button2.addEventListener('click', () => {     
-            highScore();
-        });
-        }
+        initial.style.visibility = "visible";
+        submission.style.visibility = "visible";
+        submitInit();
+    }    
 }
 
-function wrong(){
-    bottomText.style.visibility = "visible";
-    bottomText.textContent = "Wrong!";
-    minusTen();
-    setTimeout(() => {
-        bottomText.style.visibility = "hidden";
-     }, 2500);
-}
-
+/* grab the user selection by finding the 2nd element after the '.', trims the white space from the start and end (though in this instance it's only the start that is needed), and then compares it to the correct answer.  The correct answer is each 6th string in the 'contents' array.  In the questionOne() function the currentQ variable is set to 5.  The questionDisplay() function then increments the 'currentQ' variable by 1 each time it adds text to an element to get to the right value in the 'contents' array for the next element, 'currentQ' will end up on the correct answer value by the end of the function.  So the user selection is compared to the correct answer, if the values match then 'Correct' pops up at the bottom and after a 2 second delay they move on to the next question.  If the values do not match then 'Wrong' pops up at the bottom, the time left decrements by 10, and then they move on to the next question.  If time goes to 0 or less then the quiz is over and the user is sent to the endPage(). */
 function checkAnswer(event){
-    var userSelection = event.target.textContent.split(".")[1].trim();
+    console.log(event.target.textContent)
+    const userSelection = event.target.textContent.split(".")[1].trim();
     console.log(userSelection)
+    
     if(userSelection === contents[currentQ]){
     bottomText.style.visibility = "visible";
     bottomText.textContent = "Correct!";
@@ -221,11 +133,13 @@ function checkAnswer(event){
             currentQ++;
             questionDisplay()
         }else{
+            clearInterval(timeInterval);
             endPage()
         }
-     }, 2500);
+     }, 1500);
 }
 
+//updates the timer text
 function updateTimer() {
     timer.textContent = "Time: " + timeLeft;
 }
@@ -243,39 +157,42 @@ function timerCountdown() {
     }, 1000);
 }
 
+/*decrements the timer by 10, if time runs out as a result of doing so then the text reads Time's up! and takes the user to the endPage().  Otherwise it updates the timer text*/
 function minusTen () {
     timeLeft-=10
     if(timeLeft < 0){
         timeLeft = 0;
-        timer.textContent = "time Up"
+        timer.textContent = "Time's Up!"
         clearInterval(timeInterval)
         endPage()
     }else{
-            updateTimer();
+        updateTimer();
     }
 }
 
 function submitInit() {
     $('#submit').submit(function(event) {
         event.preventDefault();
-        
         var init = $('#initials').val();
             
         localStorage.setItem("Initials", init);
         localStorage.setItem("Score", timeLeft);
+        highScore();
     });
 }
 
 function showScore() {
-    var initShow = localStorage.getItem("Initials");
-    var scoreShow = localStorage.getItem("Score");
+    var initShow = localStorage.getItem("Initials") || '';
+    var scoreShow = localStorage.getItem("Score") || '';
     score.textContent = `Initials: ${initShow} Score: ${scoreShow}`;
     
 }
 
 function highScore() {
-    timeLeft = 0;
+    clearInterval(timeInterval);
+    timer.style.visibility = "hidden";
     topText.textContent = "High Scores";
+    moreText.style = "hidden";
     score.style.visibility = "visible";
     submission.style.visibility = "hidden";
     initial.style.visibility = "hidden";
@@ -284,14 +201,16 @@ function highScore() {
     button2.style.visibility = "visible";
     button3.style.visibility = "hidden";
     button4.style.visibility = "hidden"; 
-    button1.textContent = "Go back"
+    button1.textContent = "Start Over"
     button2.textContent = "Clear High Scores"
     showScore();
     button1.addEventListener('click', () => {        
-        endPage();
+        timeLeft = 100;
+        startQuiz();
     });
     button2.addEventListener('click', () => {
         localStorage.clear();
+        showScore();
     });
 }
 
